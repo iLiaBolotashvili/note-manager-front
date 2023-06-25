@@ -1,21 +1,56 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import AuthService from "../../services/auth.js";
+import axios from "axios";
 
 const Profile = () => {
   const currentUser = AuthService.getCurrentUser();
+  let userId = currentUser.id;
+
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:4000/api/notes/get/${userId}`);
+        setData(response.data);
+        setLoading(false);
+      } catch (error) {
+        setError(error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   return (
   <div className="w-96 h-96 text-black my-2 mx-auto">
       <h3>
-        <strong>{currentUser.username}</strong> Profile
+        <strong>Profile: </strong>{currentUser.username}
       </h3>
-      <p>
-        <strong>Token:</strong> {currentUser.accessToken.substring(0, 20)} ...{" "}
-        {currentUser.accessToken.substr(currentUser.accessToken.length - 20)}
-      </p>
       <p>
         <strong>Id:</strong> {currentUser.id}
       </p>
+
+      <ul>
+        {data.map(note => (
+          <li key={note.id}>
+            {note.title}
+            {note.content}
+          </li>
+        ))}
+      </ul>
+
     </div>
   );
 };

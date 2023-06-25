@@ -9,8 +9,8 @@ import AuthService from "../../services/auth.js";
 const required = (value) => {
   if (!value) {
     return (
-      <div className="alert alert-danger" role="alert">
-        This field is required!
+      <div className="font-semibold text-center text-black" role="alert">
+       Required field!
       </div>
     );
   }
@@ -103,8 +103,8 @@ const Login = () => {
             </div>
 
             {message && (
-            <div className="flex">
-              <div className={ successful ? "font-semibold text-black" : "font-semibold shadow text-black" } role="alert">
+            <div className="flex items-center justify-center">
+              <div className={ message ? "font-semibold text-center text-black" : "font-semibold text-center shadow text-black" } role="alert">
                 {message}
               </div>
             </div>
