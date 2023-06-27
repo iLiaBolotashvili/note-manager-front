@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import AuthService from "../../services/auth.js";
+import NoteAdd from '../../components/noteAdd/NoteAdd.jsx';
 import axios from "axios";
 
 const Profile = () => {
@@ -12,8 +13,13 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+
       try {
-        const response = await axios.get(`http://localhost:4000/api/notes/get/${userId}`);
+        const response = await axios.get(`http://localhost:4000/api/notes/get/${userId}`, {
+          headers: {
+            'access-token': `${currentUser.accessToken}`,
+          }
+        });
         setData(response.data);
         setLoading(false);
       } catch (error) {
@@ -50,6 +56,8 @@ const Profile = () => {
           </li>
         ))}
       </ul>
+
+      <NoteAdd />
 
     </div>
   );
