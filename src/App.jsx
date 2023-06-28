@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 
 import { Login, Register, Profile } from "./pages"
+import { Footer } from "./components"
 
 import AuthService from "./services/auth"
 
@@ -27,7 +28,7 @@ function App() {
         {currentUser ? (
           <div className="list-none mx-auto my-0 h-16 flex flex-row items-center pl-6 pr-6">
             <li  className='px-4'>
-              <Link to={"/profile"} className="text-black text-base font-semibold">
+              <Link to={"/profile"} className="nav-link text-black font-semibold text-xl px-1">
                  {currentUser.username}
               </Link>
             </li>
@@ -54,7 +55,7 @@ function App() {
       </nav>
 
 
-      <div className="mt-16">
+      <div className="my-32">
         <Routes>
           <Route path="/" element={<Register/>} />
           <Route path="/login" element={<Login/>} />
@@ -62,6 +63,8 @@ function App() {
           <Route path="/profile" element={<Profile/>} />
         </Routes>
       </div>
+
+      <Footer />
     </>
   )
 }

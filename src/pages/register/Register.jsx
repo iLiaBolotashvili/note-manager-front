@@ -123,8 +123,8 @@ const Register = () => {
           )}
 
           {message && (
-            <div className="flex">
-              <div className={ successful ? "font-semibold text-black" : "font-semibold shadow text-black" } role="alert">
+            <div className="flex items-center justify-center">
+              <div className={ successful ? "font-semibold py-2 text-center text-black" : "font-semibold py-2 text-center text-black" } role="alert">
                 {message}
               </div>
             </div>
