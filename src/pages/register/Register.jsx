@@ -8,8 +8,8 @@ import AuthService from "../../services/auth.js";
 const required = (value) => {
   if (!value) {
     return (
-      <div className="text-black text-xs" role="alert">
-        This field is required!
+      <div className="font-semibold text-center text-black" role="alert">
+        Required Field!
       </div>
     );
   }
@@ -18,7 +18,7 @@ const required = (value) => {
 const vusername = (value) => {
   if (value.length < 4 || value.length > 10) {
     return (
-      <div className="text-black text-xs" role="alert">
+      <div className="font-semibold text-center text-black" role="alert">
         The username must be between 4 and 10 characters.
       </div>
     );
@@ -28,7 +28,7 @@ const vusername = (value) => {
 const vpassword = (value) => {
   if (value.length < 4 || value.length > 10) {
     return (
-      <div className="text-black text-xs" role="alert">
+      <div className="font-semibold text-center text-black" role="alert">
         The password must be between 4 and 10 characters.
       </div>
     );
