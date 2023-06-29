@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AuthService from "../../services/auth.js";
 import NoteAdd from '../../components/noteAdd/NoteAdd.jsx';
+import NoteDelete from '../../components/noteDelete/noteDelete.jsx'
 import axios from "axios";
 
 const Profile = () => {
@@ -31,6 +32,11 @@ const Profile = () => {
     fetchData();
   }, []);
 
+  const handleNoteDelete = (noteId) => {
+    const updatedNotes = data.filter((note) => note.id !== noteId);
+    setData(updatedNotes);
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -53,6 +59,7 @@ const Profile = () => {
           <li key={note.id}>
             {note.title}
             {note.content}
+            <NoteDelete noteId={note.id} onDelete={() => handleNoteDelete(note.id)}/>
           </li>
         ))}
       </ul>
